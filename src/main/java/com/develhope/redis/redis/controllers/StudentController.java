@@ -35,11 +35,6 @@ public class StudentController {
         return studentService.getStudentById(id);
     }
 
-    @GetMapping("/nocache/{id}")
-    public StudentDTO getStudentByIdNoCache(@PathVariable Long id) {
-        return studentService.getStudentByIdNoCache(id);
-    }
-
     @GetMapping("/cache/clear")
     @CacheEvict(value = "students", allEntries = true)
     public void clearCache() {
