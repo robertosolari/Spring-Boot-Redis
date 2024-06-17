@@ -10,20 +10,28 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
+
+    private final Logger LOG = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private StudentService studentService;
 
+    @Cacheable(value = "students", key = "#id")
     @GetMapping("/{id}")
     public StudentDTO getStudentById(@PathVariable Long id) {
+        LOG.info("Getting student with ID {}.", id);
         return studentService.getStudentById(id);
     }
 
