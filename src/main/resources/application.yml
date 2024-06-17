@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/develhope
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+  logging:
+    level:
+      org.springframework.cache: DEBUG
+
