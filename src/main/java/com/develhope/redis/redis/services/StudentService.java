@@ -16,14 +16,7 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    @Cacheable(value = "students", key = "#id")
     public StudentDTO getStudentById(Long id) {
-        Student student = studentRepository.findById(id).orElse(null);
-        return student != null ? StudentConverter.entityToDTO(student) : null;
-    }
-
-    //NON SI DEVE FARE COSI', AL MASSIMO SI COMMENTA IL METODO SOPRA E SI RIMUOVE LA CACHE !!!!!!!!!
-    public StudentDTO getStudentByIdNoCache(Long id) {
         Student student = studentRepository.findById(id).orElse(null);
         return student != null ? StudentConverter.entityToDTO(student) : null;
     }
